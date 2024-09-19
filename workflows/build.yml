@@ -1,0 +1,28 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - dev  # Dev 브랜치에 푸시할 때마다 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'  # 원하는 Ruby 버전
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+      - name: Build Jekyll site
+        run: |
+          bundle exec jekyll build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
