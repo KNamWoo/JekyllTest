@@ -13,7 +13,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6.0'  # 원하는 Ruby 버전
+          ruby-version: '2.7'  # 원하는 Ruby 버전
       - name: Install dependencies
         run: |
           gem install bundler
